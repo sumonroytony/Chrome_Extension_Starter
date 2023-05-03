@@ -38,6 +38,11 @@ module.exports = {
           },
         ],
       },
+      {
+        type: 'asset/resource',
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        use: 'asset/resource',
+      },
     ],
   },
   plugins: [
@@ -52,6 +57,11 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist/js'),
     filename: '[name].js',
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
 };
 
