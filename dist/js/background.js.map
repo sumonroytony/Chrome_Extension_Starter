@@ -1,0 +1,1 @@
+{"version":3,"file":"background.js","mappings":";;;;;AAAA;AACA;AACA","sources":["webpack://thriftynft_extension/./src/background/background.ts"],"sourcesContent":["chrome.runtime.onInstalled.addListener(function () {\r\n    console.log('Extension installed');\r\n});\r\n"],"names":[],"sourceRoot":""}

@@ -5,6 +5,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: {
     index: './src/index.tsx',
+    background: './src/background/background.ts',
+    contentScript: './src/contentScript/ContentScript.ts',
   },
   devtool: 'cheap-module-source-map', // 'inline-source-map
   mode: 'development',
