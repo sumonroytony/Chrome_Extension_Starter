@@ -8,8 +8,6 @@ module.exports = {
     background: './src/background/background.ts',
     contentScript: './src/contentScript/ContentScript.ts',
   },
-  devtool: 'cheap-module-source-map', // 'inline-source-map
-  mode: 'development',
   module: {
     rules: [
       {
