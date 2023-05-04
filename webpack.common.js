@@ -1,6 +1,7 @@
 const path = require('path');
 const HTMLPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -50,9 +51,21 @@ module.exports = {
       patterns: [{ from: 'manifest.json', to: '../manifest.json' }],
     }),
     ...getHtmlPlugins(['index']),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+    }),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      stream: 'stream-browserify',
+    },
+    fallback: {
+      stream: require.resolve('stream-browserify'),
+    },
   },
   output: {
     path: path.join(__dirname, 'dist/js'),
