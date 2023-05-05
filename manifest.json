@@ -10,14 +10,15 @@
     "default_title": "ThriftyNFT"
   },
   "background": {
-    "service_worker": "js/background.js"
+    "service_worker": "js/background.js",
+    "type": "module"
   },
   "permissions": ["tabs"],
   "content_scripts": [
     {
       "matches": ["https://*.twitter.com/*"],
       "js": ["js/contentScript.js"],
-      "run_at": "document_end"
+      "type": "module"
     }
   ]
 }

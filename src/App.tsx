@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './assets/tailwind.css';
 // import { ethers } from 'ethers';
 import { AvaxTestNet, AvaxTestNetChainId } from './helpers/const';
-import Web3Provider from '@ethersproject/providers';
 import { connectMetaMask } from './helpers/connectMetamask';
 import { ethers } from 'ethers';
 import toast, { Toaster } from 'react-hot-toast';
@@ -14,8 +13,15 @@ function App() {
   const [account, setAccount] = React.useState('');
   const [token, setToken] = React.useState('');
   const [user, setUser] = React.useState({} as any);
+  const [twitterId, setTwitterId] = React.useState('');
 
-  chrome.runtime.connect({ name: 'popup' });
+  // chrome.runtime.onConnect.addListener((port) => {
+  //   port.onMessage.addListener((message) => {
+  //     if (message.type === 'sendMoney') {
+  //       handleConnectToMetamask();
+  //     }
+  //   });
+  // });
 
   const handleConnectToMetamask = () => {
     const _provider = connectMetaMask();
@@ -38,6 +44,7 @@ function App() {
         const user = await client.users.register();
         setUser(user);
         setAccount(accounts[0]);
+        setTwitterId(user.socials.twitter);
         console.log(user);
       } catch (error) {
         toast.error('Please connect to Avalanche Fuji Testnet');
@@ -46,8 +53,10 @@ function App() {
       }
     });
   };
+
+  const handleTwitterConnect = async () => {};
   return (
-    <div className='flex justify-center align-middle h-[400px] w-[340px] bg-slate-50'>
+    <div className='flex flex-col justify-center h-[400px] w-[340px] bg-slate-50'>
       <button
         type='button'
         className='rounded-md bg-indigo-50 px-3 py-2 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100'
@@ -55,6 +64,16 @@ function App() {
       >
         {account ? 'Connected' : 'Connect to Metamask'}
       </button>
+
+      {account && (
+        <button
+          type='button'
+          className='rounded-md bg-indigo-50 px-3 py-2 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100'
+          onClick={handleTwitterConnect}
+        >
+          {twitterId ? 'Connected to ' + twitterId : 'Connect to Twitter'}
+        </button>
+      )}
       <Toaster />
     </div>
   );

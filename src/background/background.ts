@@ -1,14 +1,15 @@
 chrome.runtime.onConnect.addListener((port) => {
-  console.log('connected ', port);
+  port.onMessage.addListener((message) => {
+    if (message.type === 'connect_metamask') {
+      // console.log(provider, 'dddddd');
+      // sendResponse(provider);
+      console.log('connect_metamask');
+    }
 
-  if (port.name === 'popup') {
-    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      if (message.type === 'connect_metamask') {
-        // console.log(provider, 'dddddd');
-        // sendResponse(provider);
-        console.log('connect_metamask');
-        sendResponse('connect_metamask2');
-      }
-    });
-  }
+    if (message.type === 'sendMoney') {
+      console.log({ port });
+      // var popups = chrome.extension.getViews();
+      // console.log({ popups });
+    }
+  });
 });
